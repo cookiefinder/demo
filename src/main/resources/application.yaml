@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: demo
+  datasource:
+    url: jdbc:mysql://127.0.0.1:13306/demo?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+logging:
+  level:
+    # SQL日志
+    org.hibernate.SQL: DEBUG
+    # SQL参数日志
+    org.hibernate.type.descriptor.sql: TRACE
+    # 数据源日志
+    com.zaxxer.hikari: INFO
+    # 事务日志
+    org.springframework.transaction: DEBUG
