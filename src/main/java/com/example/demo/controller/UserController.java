@@ -20,6 +20,7 @@ public class UserController {
     private final ApplicationEventPublisher eventPublisher;
 
     @PostMapping("/users")
+    @Transactional
     public void save(User user) {
         log.info("save user: {}", user);
         User save = userService.save(user);
@@ -33,10 +34,13 @@ public class UserController {
     }
 
     @GetMapping("/test2")
-    @Transactional
+    // @Transactional 开启后无法catch事务ex
     public void test2() {
-        User save = userService.save(User.builder().name("zijie2").build());
-        log.info("saved user {}", save.getId());
+        try {
+            userService.save(User.builder().name("zijie2").build());
+        } catch (Exception e) {
+            log.warn("test2: {}", e.getMessage());
+        }
     }
 
 }
